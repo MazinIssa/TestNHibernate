@@ -24,6 +24,8 @@ namespace NHibernateTest.NHBNTypes
         public virtual Guid Id { get; set; }
         public virtual string Name { get; set; }
         public virtual int Price { get; set; }
+
+        public virtual IList<string> Tags { get; set; } //another surprise! It just works!
     }
 
     public class DbConfig : FluentNHibernate.Automapping.DefaultAutomappingConfiguration

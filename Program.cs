@@ -21,7 +21,8 @@ namespace NHibernateTest
 
             //SaveDataTest(session);
             //GetDataTest(session);
-            UpdateExistingDataUsingUnAttachedObject(session);
+            //UpdateExistingDataUsingUnAttachedObject(session);
+            TestListStringSave(session);
 
             session.Close();
         }
@@ -69,6 +70,16 @@ namespace NHibernateTest
 
             //session.Save(p); //this ignored that the key is set to an existent object, and created a new row in the table!
             session.SaveOrUpdate(p); //worked as expected. NHibernate is my ORM of choice from now on.
+
+            transaction.Commit();
+        }
+
+        private static void TestListStringSave(NHibernate.ISession session)
+        {
+            Item i = new Item() { Name = "Washing Machine", Price = 300, Tags = new List<string>() { "Rabbit", "Jump", "Over" } };
+            var transaction = session.BeginTransaction();
+
+            session.Save(i);
 
             transaction.Commit();
         }
